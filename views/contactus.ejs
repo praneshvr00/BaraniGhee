@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel = "icon" href = 
+    "img/mainlogo.png"
+            type = "image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="text/css" href="css/media_style.css" />
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .navb {
+      top: 0;
+      position: fixed;
+    }
+    .burgericon {
+      display: none !important;
+    }
+    .navbarOverlay {
+      width: 100%;
+      height: 400px;
+      z-index: 9;
+      opacity: 0.7;
+      position: fixed;
+      top: 70px;
+      background-color: rgb(0, 0, 0);
+      display: none;
+    }
+    .navbarOverlay .Ovmenu {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .navbarOverlay ul {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* background-color: #06f; */
+      /* text-align: center; */
+    }
+    .navbarOverlay ul li {
+      margin: 10px;
+      list-style-type: none;
+    }
+    .navbarOverlay ul li a {
+      color: #fff;
+    }
+    @media screen and (max-width: 708px) {
+      .image-container {
+        width: 100% !important;
+      }
+      .navb {
+        width: 100vw;
+      }
+      .navb .logo img {
+        /* padding-left: 50%; */
+      }
+      .navb .menu {
+        display: none;
+        width: 100vw;
+      }
+      .navb .menu ul {
+        width: 98vw;
+      }
+      .navb .burgericon {
+        display: inline-block !important;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+      }
+      #location {
+        width: 100vw !important;
+        overflow: hidden;
+      }
+      #map {
+        height: fit-content;
+      }
+    }
+    #userImg img{
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    @media screen and (max-width: 708px) {
+      #userImg {
+        margin-right: 0 !important;
+        margin-left: auto !important;
+
+      }
+      
+    }
+  </style>
+  <body>
+    <span class="navbarOverlay" id="showOverlay">
+      <div class="Ovmenu">
+        <ul>
+          <span
+            onclick="showMenu()"
+            class="cross"
+            style="color: #fff; position: absolute; left: 20px; top: 20px"
+          >
+            <i class="fa-solid fa-3x fa-xmark"></i>
+          </span>
+          <li><a href="/">Home </a></li>
+          <li><a href="product"> Product </a></li>
+          <li><a href="#" style="color: #5e5df0;"> Contact Us </a></li>
+          <li><a href="about"> About Us </a></li>
+          <li><a href="shop"> Shop </a></li>
+          <% if (user == null) { %>
+            <li><a href="signup"> Login/Signup </a></li>
+          <% } else { %> 
+              <li><a href="profile"> Profile </a></li>
+              <li><a href="orders"> My Orders </a></li>
+              <li><a href="logout"> Logout </a></li>
+          <% } %>
+          <li>
+            <a href="cart"> <i class="fas fa-2x fa-shopping-cart"></i> </a>
+          </li>
+        </ul>
+      </div>
+    </span>
+    <div class="image-container">
+      <p class="image-holder">
+        <img src="img/loading.gif" />
+      </p>
+    </div>
+    <div class="navb">
+      <div class="logo" style="display: flex;justify-content: space-between; ">
+        
+        <% if (url) { %>
+         <div id="userImg">
+          <img  src = <%= url %>   referrerpolicy="no-referrer" />
+         </div>
+        <% } else { %> 
+          
+        <% } %>
+        <img id="barani" src="img/mainlogo.png" />
+      </div>
+      <div class="name"></div>
+      <div class="menu">
+        <ul>
+          <li><a href="/"> Home </a></li>
+          <li><a href="product"> Product </a></li>
+          <li><a href="#"><span class="active">Contact Us</span> </a></li>
+          <li><a href="about"> About Us </a></li>
+          <li><a href="shop"> Shop </a></li>
+          <% if (user == null) { %>
+          <li><a href="signup"> Login/Signup </a></li>
+          <% } else { %> 
+            <li><a href="profile"> Profile </a></li>
+            <li><a href="orders"> My Orders </a></li>
+            <li><a href="logout"> Logout </a></li>
+          <% } %>
+          <li>
+            <a href="cart"> <i class="fas fa-2x fa-shopping-cart"></i> </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        id="burgericon"
+        class="burgericon"
+        style="display: flex; align-items: center"
+        onclick="showMenu()"
+      >
+        <i class="fa-solid fa-3x fa-bars"></i>
+      </div>
+    </div>
+    <!-- contact  -->
+    <div class="title" style="margin-top: 150px">
+      <h2 style="font-size: 3rem; font-weight: 900">CONTACT US</h2>
+    </div>
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center mb-5"></div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="wrapper">
+              <div class="row no-gutters mb-5">
+                <div class="col-md-7">
+                  <div class="contact-wrap w-100 p-md-5 p-4">
+                    <h3 class="mb-4" style="color: #5e5df0; font-weight: 900">
+                      FEEL FREE TO CONTACT US
+                    </h3>
+                    <div id="form-message-warning" class="mb-4"></div>
+                    <div
+                      id="form-message-success"
+                      class="mb-4"
+                      style="color: palegreen; font-weight: 800"
+                    >
+                      ---- Contact Form ----
+                    </div>
+                    <form
+                      method=""
+                      id="contactForm"
+                      name="contactForm"
+                      class="contactForm"
+                      onclick="reload()"
+                    >
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="label" for="name">Full Name</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              name="name"
+                              id="name"
+                              placeholder="Name"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="label" for="email"
+                              >Email Address</label
+                            >
+                            <input
+                              type="email"
+                              class="form-control"
+                              name="email"
+                              id="email"
+                              placeholder="Email"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="label" for="subject">Subject</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              name="subject"
+                              id="subject"
+                              placeholder="Subject"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="label" for="#">Message</label>
+                            <textarea
+                              name="message"
+                              class="form-control"
+                              id="message"
+                              cols="30"
+                              rows="4"
+                              placeholder="Message"
+                            ></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <input
+                              type="submit"
+                              value="Send Message"
+                              class="btn btn-primary"
+                            />
+                            <div class="submitting"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <div class="col-md-5 d-flex align-items-stretch" id="location">
+                  <div id="map">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9130.930154208636!2d77.7473110560219!3d10.488988160705187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2c2345b209e0aae8!2sSASI%20TRADERS%20(%20Barani%20ghee)!5e0!3m2!1sen!2sin!4v1653113987016!5m2!1sen!2sin"
+                      width="400"
+                      height="400"
+                      style="border: 0"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="dbox w-100 text-center">
+                    <div
+                      class="icon d-flex align-items-center justify-content-center"
+                    >
+                      <span class="fa fa-2x fa-map-marker"></span>
+                    </div>
+                    <div class="text">
+                      <p style="font-size: 15px">
+                        <span style="font-size: 20px"> Address:</span>446/T,ASM Pettai,
+                        Oddanchatram-624619
+                        Dindigul District.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="dbox w-100 text-center">
+                    <div
+                      class="icon d-flex align-items-center justify-content-center"
+                    >
+                      <span class="fa fa-2x fa-phone"></span>
+                    </div>
+                    <div class="text">
+                      <p>
+                        <span style="font-size: 20px">Phone 1:</span>
+                        <a href="tel://1234567920" style="font-size: 15px"
+                          >+91 94430 42655</a
+                        >
+                      </p>
+                      <p>
+                        <span style="font-size: 20px">Phone 2:</span>
+                        <a href="tel://1234567920" style="font-size: 15px"
+                          >+91 94430 42695</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="dbox w-100 text-center">
+                    <div
+                      class="icon d-flex align-items-center justify-content-center"
+                    >
+                      <span class="fa fa-2x fa-paper-plane"></span>
+                    </div>
+                    <div class="text">
+                      <p>
+                        <span style="font-size: 20px">Email:</span>
+                        <a
+                          href="mailto:info@yoursite.com"
+                          style="font-size: 15px"
+                          >sasitraderscustomercare@gmail.com</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="dbox w-100 text-center">
+                    <div
+                      class="icon d-flex align-items-center justify-content-center"
+                    >
+                      <span class="fa fa-2x fa-globe"></span>
+                    </div>
+                    <div class="text">
+                      <p>
+                        <span style="font-size: 20px">Website</span>
+                        <a href="#" style="font-size: 15px">baranighee.com</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--  footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <strong><h6>About</h6></strong>
+            <p class="text-justify">
+              For over four decades, we Barani are manufacturing Butter and Ghee
+              in a traditional way.We use milk and cream in and around the same
+              locality and hence helping the community to grow.We are employing
+              the needies and ensuring their families development. The company
+              takes pride in its four decades old conviction to provide Purity,
+              Taste & Quality.
+            </p>
+          </div>
+          <div class="col-xs-6 col-md-3" style="font-weight: 800px">
+            <strong><h6>Contact Us</h6></strong>
+            <ul class="footer-links" style="color: white">
+              <li>
+                <b>Address:</b>446/T,ASM Pettai,<br />
+                Oddanchatram-624619<br />
+                Dindigul District.
+              </li>
+              <li><b>Phone:</b>9443042655</li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <strong><h6>Quick Links</h6></strong>
+            <ul class="footer-links">
+              <li>
+                <a href="">Home</a>
+              </li>
+              <li><a href="http://scanfcode.com/about/">About Us</a></li>
+              <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+
+              <li>
+                <a href="http://scanfcode.com/privacy-policy/">Products</a>
+              </li>
+              <li><a href="http://scanfcode.com/sitemap/">Shop</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">
+              Copyright &copy; 2025 All Rights Reserved by
+              <a href="#">Bharani</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li>
+                <a class="facebook" href="#"
+                  ><i class="fa-brands fa-facebook"></i
+                ></a>
+              </li>
+              <li>
+                <a class="twitter" href="#"
+                  ><i class="fa-solid fa-envelope"></i
+                ></a>
+              </li>
+              <li>
+                <a class="dribbble" href="#"
+                  ><i class="fa-brands fa-instagram"></i
+                ></a>
+              </li>
+              <li>
+                <a class="linkedin" href="#"
+                  ><i class="fa-solid fa-phone"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      $("div.image-container").delay(850).fadeOut("slow");
+    </script>
+    <script>
+      function showMenu() {
+        var show = document.getElementById("showOverlay");
+        var icon = document.getElementById("burgericon");
+
+        if (show.style.display == "inline") {
+          show.style.display = "none";
+        } else {
+          show.style.display = "inline";
+        }
+      }
+      $.each($("*"), function () {
+        if ($(this).width() > $("body").width()) {
+          console.log("Wide Element: ", $(this), "Width: ", $(this).width());
+        }
+      });
+    </script>
+  </body>
+</html>

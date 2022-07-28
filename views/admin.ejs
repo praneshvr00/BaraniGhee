@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="text/css" href="media_style.css" />
+    <style>
+       * {
+        padding: 0;
+        margin: 0;
+      }
+      .navb {
+        top: 0;
+        position: fixed;
+      }
+         #LGQuantity{
+        display: none;
+      }
+      #GQuantity {
+        display: none;
+      }
+      #LBQuantity{
+        display: none;
+      }
+      #BQuantity {
+        display: none;
+      }
+      .navb {
+        width: 15vw;
+        height: 800px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        /* gap: 320px; */
+        position: fixed;
+        z-index: 1;
+        /* background-image: url("img/My project.png"); */
+      }
+      .navb .logo {
+        display: flex;
+        width: 170px;
+        height: 73px;
+        margin-left: 30px;
+        margin-top: 5px;
+        border-bottom: 1px solid #5e5df0;
+      }
+      .navb .logo img {
+        width: 250px;
+        height: 100%;
+        object-fit: contain;
+      }
+      .navb .name {
+        display: flex;
+        width: 200px;
+        height: 73px;
+        margin-left: 200px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .navb .active {
+        border-bottom: 2px solid blue;
+        padding: 5px;
+      }
+      .navb .menu {
+        width: 80%;
+        top: 20%;
+        left: 17%;
+        height: fit-content;
+        position: absolute;
+      }
+      .navb .menu ul {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        color: #121212;
+        cursor: pointer;
+      }
+      .navb .menu ul a {
+        color: #121212;
+        text-decoration: none;
+      }
+      .navb .menu ul li {
+        padding: 10px;
+        /* font-size : larger; */
+      }
+      .navb .menu ul a:hover {
+        color: #5e5df0;
+      }
+      .burgericon {
+        color: #121212;
+        display: none !important;
+      }
+      .navbarOverlay {
+        width: 100%;
+        height: 400px;
+        z-index: 9;
+        opacity: 0.7;
+        position: fixed;
+        top: 70px;
+        background-color: rgb(0, 0, 0);
+        display: none;
+      }
+      .navbarOverlay .Ovmenu {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .navbarOverlay ul {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-color: #06f; */
+        /* text-align: center; */
+      }
+      .navbarOverlay ul li {
+        margin: 10px;
+        list-style-type: none;
+      }
+      .navbarOverlay ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.5rem;
+      }
+      .navbarOverlay ul form {
+        margin-top: 15px;
+      }
+      .navbarOverlay ul  #logout{
+        width: 500px;
+      }
+      @media screen and (max-width: 708px) {
+        .admContainer .wrapper .form {
+          width: 100%;
+          height: 60%;
+        }
+        .admContainer .wrapper .form form input[type="text"] {
+          width: 70%;
+          height: 7%;
+          margin: 10px;
+        }
+        .admContainer .wrapper .form form select{
+          width: 70%;
+          height: 10%;
+        }
+        .navb{
+          display: none;
+        }
+        .burgericon{
+          display: block !important;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          z-index: 2;
+        }
+      }
+    
+    </style>
+  </head>
+  <body>
+    <!-- <div class="image-container"> -->
+      <!-- <p class="image-holder">
+        <img src="img/loading.gif" />
+      </p> -->
+    <!-- </div> -->
+    <div id="burgericon" class="burgericon" onclick="showMenu()">
+     <i class="fa-solid fa-3x fa-bars"></i>
+    </div>
+    <span class="navbarOverlay" id="showOverlay">
+      <div class="Ovmenu">
+        <ul>
+          <span
+            onclick="showMenu()"
+            class="cross"
+            style="color: #fff; position: absolute; right: 20px; top: 20px"
+          >
+            <i id="xMark" class="fa-solid fa-3x fa-xmark" ></i>
+          </span>
+          <li><a href="#" style="color: #5e5df0;">Dashboard </a></li>
+          <li><a href="adminitem"> ManageItems </a></li>
+          <li><a href="stock"> Stock</a></li>
+          <form method="post" action="/adminLogout">
+            <button type="submit" value="Logout" style="width: 60px; height: 30px; color: #121212; background-color: #fff;" >Logout</button>
+          </form>
+        </ul>
+      </div>
+    </span>
+    <div class="navb">
+      <div class="logo" style="display: flex;justify-content: space-between; ">
+        <img src="img/mainlogo.png" />
+      </div>
+      <div class="name"></div>
+      <div class="menu">
+        <ul>
+          <li><a href="#" style="color: #5e5df0; text-decoration: none;"> Dasboard </a></li>
+          <li><a href="adminitem"> ManageItems </a></li>
+          <li><a href="stock"> Stock </a></li>
+          <form method="post" action="/adminLogout">
+            <button id="logout" type="submit" value="Logout">Logout</button>
+          </form>
+        </ul>
+      </div>
+    </div>
+    <div class="admContainer">
+      <img class="bg" src="img/My project.png">
+      <div class="wrapper">
+        <div class="form">
+          <form
+            id="adminform"
+            name="adminform"
+            onsubmit="return validation()"
+            action="/admin"
+            method="post"
+          >
+            <label for="img">Paste Product Image URL </label>
+            <input type="text" id="img" name="img" />
+            <label for="Category">Select Category</label>
+            <select id="Category" name="Category" onchange="change()">
+              <option value="none">None</option>
+              <option value="ghee">Ghee</option>
+              <option value="butter">Butter</option>
+            </select>
+            <label for="GQuantity" id="LGQuantity">Select Ghee Quantity</label>
+            <select id="GQuantity" name="GQuantity">
+              <option value="none">None</option>
+              <option value="100">100 ml(20 bottles)</option>
+              <option value="200">200 ml(10 bottles)</option>
+              <option value="500">500 ml(6 bottles)</option>
+              <option value="1">1 ltr(2 bottles)</option>
+              <option value="5">5 ltr</option>
+              <option value="5">15 ltr</option>
+            </select>
+            <label for="BQuantity" id="LBQuantity">Select Butter Quantity</label>
+            <select id="BQuantity" name="BQuantity">
+              <option value="none">None</option>
+              <option value="1">1 kg(2 one kg box)</option>
+              <option value="2">5 kg</option>
+              <option value="3">15 kg</option>
+            </select>
+            <label for="Amount">Enter Amount</label>
+            <input type="text" id="Amount" name="Amount" />
+            <input type="submit" value="submit" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function change() {
+        var category = document.getElementById("Category");
+        var idx = category.selectedIndex;
+        var categoryValue = category.options[idx].value;
+        console.log(categoryValue + " Hmm");
+
+        if (categoryValue == "none") {
+          var qQuantity = document.getElementById("GQuantity");
+          qQuantity.style.display = "none";
+          var bQuantity = document.getElementById("BQuantity");
+          bQuantity.style.display = "none";
+          var qlabel = document.getElementById("LGQuantity");
+          var blabel = document.getElementById("LBQuantity");
+          qlabel.style.display="none";
+          blabel.style.display="none";
+        }
+        else if (categoryValue == "ghee") {
+          var qQuantity = document.getElementById("GQuantity");
+          qQuantity.style.display = "block";
+          var bQuantity = document.getElementById("BQuantity");
+          bQuantity.style.display = "none";
+          var qlabel = document.getElementById("LGQuantity");
+          var blabel = document.getElementById("LBQuantity");
+          qlabel.style.display="block";
+          blabel.style.display="none";
+        }
+        else if (categoryValue == "butter") {
+          var qQuantity = document.getElementById("GQuantity");
+          qQuantity.style.display = "none";
+          var bQuantity = document.getElementById("BQuantity");
+          bQuantity.style.display = "block";
+          var qlabel = document.getElementById("LGQuantity");
+          var blabel = document.getElementById("LBQuantity");
+          qlabel.style.display="none";
+          blabel.style.display="block";
+        }
+      }
+    </script>
+    <script type="text/javascript" src="js/adminValid.js"></script>
+    <script type="text/javascript" src="../app.js">
+
+      var status = <%= status %>;
+      if (status == 1){
+          alert("Successfully Inserted !");
+      }
+      else{
+          alert("oops ! Try it again.");
+      }
+    </script>
+    <script>
+      $("div.image-container").delay(850).fadeOut("slow");
+    </script>
+     <script>
+      function showMenu() {
+        var show = document.getElementById("showOverlay");
+        var icon = document.getElementById("burgericon");
+
+        if (show.style.display == "inline") {
+          show.style.display = "none";
+        } else {
+          show.style.display = "inline";
+        }
+      }
+      $.each($("*"), function () {
+        if ($(this).width() > $("body").width()) {
+          console.log("Wide Element: ", $(this), "Width: ", $(this).width());
+        }
+      });
+    </script>
+  </body>
+</html>
